@@ -1,0 +1,82 @@
+<html>
+<head>
+	<style type="text/css">
+		.sidenav {
+			height:100%;
+			width:200px;
+			position: fixed;
+			z-index:2;
+			top:0;
+			left:0;
+			background-color:black;
+			
+		}
+
+		.sidenav a {
+			padding:6px 8px 6px 16px;
+			text-decoration: none;
+			font-family: serif;
+			font-size:20px;
+			color: white;
+			display:block;
+		}
+
+		.sidenav a:hover{
+			color:#f1f1f1;
+		}
+
+		.dropdownopen a {
+			padding:12px 16px 12px 24px;
+			text-decoration: none;
+			font-family: serif;
+			font-size:16px;
+			color: #bac8ca;
+			display:block;
+		}
+
+		.main{
+			margin-left:160px;
+			padding: 0px 10px;
+		}
+
+	</style>
+	<title>{% block title %}Employee CRM{% endblock %}</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+	<div class="sidenav">
+		<div class="menu">
+		<a href="{% url 'dashboard' %}"><i class="fas fa-desktop"></i>Dashboard</a>
+		<a href="#"><i class="fas fa-stamp"></i>Master</a>
+		<div class="dropdownopen">
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="department">Department</a>
+				<a class="dropdown-item" href="#">Designation</a>
+				<a class="dropdown-item" href="#">Location</a>
+			</div>
+		
+		</div>
+		<a href="#"><i class="fas fa-user-circle"></i>Employees</a>
+		<a href="#">Accounts</a>
+		<div class="dropdownopen">
+		<div class="dropdown-menu">
+			<a class="dropdown-item" href="#">User List</a>
+		</div>
+	</div>
+		<a href="#"><i class="fas fa-print"></i>Reports</a>
+		<div class="dropdownopen">
+			<div class="dropdown-menu">
+		</div>
+		<a href="#">Logout</a>
+	</div>
+
+</div>
+
+	{% block content %}
+	{% endblock %}
+	
+</body>
+</html>
+
