@@ -5,6 +5,7 @@ from .views import *
 
 urlpatterns = [
     path("", dashboard, name="dashboard"),
+    path('admin_logout',admin_logout,name="admin_logout"),
 
     #master
     # path('department/', department, name='department'),
