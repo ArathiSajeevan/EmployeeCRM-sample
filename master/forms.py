@@ -1,12 +1,24 @@
+from django.forms import ModelForm
 from django import forms
-from master.models import department_model
+from .models import *
 
 
-class DepartmentForm(forms.ModelForm):
+class DepartmentForm(ModelForm):
     class Meta:
-        model = department_model
-        fields = ['department_id','department_name', 'description']
+        model = tbl_department
+        fields = ['department_name', 'description']
 
-    department_id = forms.IntegerField(label="Department Id")
-    department_name  = forms.CharField(label="Department Name", max_length=50)
-    description = forms.Textarea()
+        widgets = {
+            "department_name":forms.TextInput(attrs={"class": "form-control", 'required': 'true'}),
+            "description":forms.TextInput(attrs={"class": "form-control", 'required': 'true'}),
+        }
+
+class DepartmentEditForm(ModelForm):
+    class Meta:
+        model = tbl_department
+        fields = ['department_name', 'description']
+
+        widgets = {
+            "department_name":forms.TextInput(attrs={"class": "form-control", 'required': 'true'}),
+            "description":forms.TextInput(attrs={"class": "form-control", 'required': 'true'}),
+        }

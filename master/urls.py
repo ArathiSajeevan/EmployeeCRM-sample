@@ -8,7 +8,10 @@ urlpatterns = [
     path('admin_logout',admin_logout,name="admin_logout"),
 
     #master
-    path('', dashboard, name="dashboard"),
+    path('dashboard/', dashboard, name="dashboard"),
+    path('view_department_details', view_department_details, name="view_department_details"),
     path('department/', department, name='department'),
+    path('delete_depData/<str:id>', delete_depData, name="delete_depData"),
+    path('update_dep_view/<str:pk>', update_dep_view, name="update_dep_view"),
 
 ]

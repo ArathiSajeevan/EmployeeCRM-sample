@@ -3,7 +3,18 @@ from django.db import models
 # Create your models here.
 import uuid
 
-class department_model(models.Model):
-    department_id = models.IntegerField(primary_key=True)
+class tbl_department(models.Model):
+    department_id = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
+    created_user = models.CharField(max_length=50, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    updated_user = models.CharField(max_length=50, null=True, blank=True)
+    updated_at = models.DateTimeField(null=True, blank=True)
     department_name = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
+
+
+    class Meta:
+        ordering = ('-created_at',)
+
+    def __str__(self):
+        return self.department_name
