@@ -63,17 +63,17 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#employee_collapseUtilities" aria-expanded="true" aria-controls="employee_collapseUtilities">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#master_collapseUtilities" aria-expanded="true" aria-controls="employee_collapseUtilities">
                 <i class="far fa-address-card"></i>
                 <span>Master</span>
             </a>
-            <div id="employee_collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div id="master_collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <!--                    <h6 class="collapse-header">Employee Utilities:</h6>-->
                     {% if request.user.user_type != "Accountant" %}
                     <center>
                     <a class="collapse-item" href="{%url 'view_department_details'%}">Department</a>
-                    <a class="collapse-item" href="#">Designation</a>
+                    <a class="collapse-item" href="{%url 'designation_list'%}">Designation</a>
                     <a class="collapse-item" href="#">Location</a>
                     </center>
                     {% endif %}
@@ -89,12 +89,12 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#employee_collapseUtilities"
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#accounts_collapseUtilities"
                aria-expanded="true" aria-controls="employee_collapseUtilities">
                 <i class="far fa-address-card"></i>
                 <span>Accounts</span>
             </a>
-            <div id="employee_collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+            <div id="accounts_collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <!--                    <h6 class="collapse-header">Employee Utilities:</h6>-->
@@ -107,12 +107,12 @@
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#employee_collapseUtilities"
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reports_collapseUtilities"
                aria-expanded="true" aria-controls="employee_collapseUtilities">
                 <i class="far fa-address-card"></i>
                 <span>Reports</span>
             </a>
-            <div id="employee_collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+            <div id="reports_collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <!--                    <h6 class="collapse-header">Employee Utilities:</h6>-->

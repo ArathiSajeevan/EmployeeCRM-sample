@@ -7,11 +7,19 @@ from .views import *
 urlpatterns = [
     path('admin_logout',admin_logout,name="admin_logout"),
 
-    #master
+    #department
     path('dashboard/', dashboard, name="dashboard"),
-    path('view_department_details', view_department_details, name="view_department_details"),
     path('department/', department, name='department'),
-    path('delete_depData/<str:id>', delete_depData, name="delete_depData"),
+    path('view_department_details', view_department_details, name="view_department_details"),
     path('update_dep_view/<str:pk>', update_dep_view, name="update_dep_view"),
+    path('delete_depData/<str:id>', delete_depData, name="delete_depData"),
+    
+
+
+    #designation
+    path('designation_add', designation_add, name='designation_add'),
+    path('designation_list', designation_list, name='designation_list'),
+    path('update_designation/<str:pk>', update_designation, name="update_designation"),
+    path('delete_designation/<str:id>', delete_designation, name="delete_designation"),
 
 ]

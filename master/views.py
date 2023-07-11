@@ -4,9 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.views.decorators.cache import cache_control
 
-from master.forms import DepartmentEditForm
-from .models import tbl_department
 from master.forms import DepartmentForm
+from master.forms import DepartmentEditForm
+from master.forms import DesignationForm
+from master.forms import DesignationEditForm
+from .models import Designation, tbl_department
 from django.contrib import messages
 
 # Create your views here.
@@ -16,6 +18,7 @@ from django.contrib import messages
 def dashboard(request):
     return render(request, 'master/dashboard.html')
 
+#Department
 
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -53,7 +56,6 @@ def delete_depData(request, id):
     return redirect('view_department_details')
 
 
-#######
 
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -81,7 +83,7 @@ def update_dep_view(request, pk):
 
     context = {'form': form, 'DepartmentForm':DepartmentForm, 'editing': editing}
     if request.method == "POST":
-        form = DepartmentForm(request.POST, request.FILES, instance=departmentData)
+        form = DepartmentForm(request.POST, instance=departmentData)
         if form.is_valid():
             data = form.save(commit=False)
             data.save()
@@ -93,8 +95,78 @@ def update_dep_view(request, pk):
             return render(request, template_name, context)
     else:
         return render(request, template_name, context)
-######
+
+
+#Designation
+
+@login_required
+def designation_add(request):
+    form = DesignationForm()
+    template_name = "master/designation_add.html"
+    context = {'form': form}
+    if request.method == "POST":
+        form = DesignationForm(request.POST)
+
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.save()
+            messages.success(request, 'Designation Successfully Added.', 'alert-success')
+            return redirect('designation_list')
+        else:
+            context = {'form': form}
+            print(form.errors)
+            messages.success(request, 'Data is not valid.', 'alert-danger')
+            return render(request, template_name, context)
+    else:
+        return render(request, template_name, context)
     
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def designation_list(request):
+    mydata = Designation.objects.all()
+    if(mydata != ''):
+        return render(request, 'master/designation_list.html',{'datas':mydata})
+    else:
+        return render(request, 'master/designation_list.html')
+    
+
+
+@login_required()
+def delete_designation(request, id):
+    pk = request.GET.get("designation_id")
+    Designation.objects.get(designation_id=id).delete()
+    messages.success(request, 'Data Deleted Successfully.', 'alert-danger')
+    return redirect('designation_list')
+
+
+
+@login_required
+def update_designation(request, pk):
+    template_name = "master/update_designation.html"
+    designationData = Designation.objects.get(designation_id = pk)
+    form = DesignationEditForm(instance=designationData)
+    
+
+    if designationData:
+        editing = 1
+    else:
+        editing = 0
+
+    context = {'form': form, 'DesignationForm':DesignationForm, 'editing': editing}
+    if request.method == "POST":
+        form = DesignationForm(request.POST, instance=designationData)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.save()
+            messages.success(request, 'Designation Details Updated.', 'alert-success')
+            return redirect('designation_list')
+        else:
+            context = {'form': form, 'editing': editing}
+            messages.success(request, 'Data is not valid.', 'alert-danger')
+            return render(request, template_name, context)
+    else:
+        return render(request, template_name, context)
 
 
 
