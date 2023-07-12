@@ -27,5 +27,6 @@ urlpatterns = [
     path('location_add', location_add, name="location_add"),
     path('location_list', location_list, name="location_list"),
     path('update_location/<str:pk>', update_location, name="update_location"),
+    path('delete_location/<str:id>', delete_location, name="delete_location"),
 
 ]

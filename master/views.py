@@ -230,3 +230,11 @@ def update_location(request, pk):
             return render(request, template_name, context)
     else:
         return render(request, template_name, context)
+    
+
+@login_required()
+def delete_location(request, id):
+    pk = request.GET.get("location_id")
+    Location.objects.get(location_id=id).delete()
+    messages.success(request, 'Data Deleted Successfully.', 'alert-danger')
+    return redirect('location_list')

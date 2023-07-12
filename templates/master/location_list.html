@@ -31,8 +31,8 @@
                        class="btn btn-outline-secondary fa fa-edit btn-md"
                        data-toggle="tooltip" title="Edit"></a>
 
-                    <a href="#"
-                       data-bs-toggle="modal" id="{{data.department_id}}" data-bs-target="#deleteItemModal"
+                    <a href="{%url 'delete_location' data.location_id%}"
+                       data-bs-toggle="modal" id="{{data.location_id}}" data-bs-target="#deleteItemModal"
                        onclick="return f1(this)" title="Delete"><span class="btn btn-outline-danger btn-md confirm-delete">
                         <i class="fa fa-trash" aria-hidden="true"></i></span></a>
 
