@@ -4,11 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.views.decorators.cache import cache_control
 
-from master.forms import DepartmentForm
-from master.forms import DepartmentEditForm
-from master.forms import DesignationForm
-from master.forms import DesignationEditForm
-from .models import Designation, tbl_department
+from master.forms import DepartmentForm, DepartmentEditForm
+from master.forms import DesignationForm, DesignationEditForm
+from master.forms import LocationAddForm
+from .models import Designation, tbl_department, Location
 from django.contrib import messages
 
 # Create your views here.
@@ -170,6 +169,27 @@ def update_designation(request, pk):
 
 
 
+@login_required
+def location_add(request):
+    form = LocationAddForm()
+    template_name = "master/location_add.html"
+    context = {'form': form}
+    if request.method == "POST":
+        form = LocationAddForm(request.POST)
+
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.save()
+            messages.success(request, 'Location Successfully Added.', 'alert-success')
+            return redirect('location_add')
+        else:
+            context = {'form': form}
+            print(form.errors)
+            messages.success(request, 'Data is not valid.', 'alert-danger')
+            return render(request, template_name, context)
+    else:
+        return render(request, template_name, context)
+    
 
 
 

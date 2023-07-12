@@ -22,4 +22,8 @@ urlpatterns = [
     path('update_designation/<str:pk>', update_designation, name="update_designation"),
     path('delete_designation/<str:id>', delete_designation, name="delete_designation"),
 
+
+    #location
+    path('location_add', location_add, name="location_add"),
+
 ]

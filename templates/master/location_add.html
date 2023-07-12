@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} Add Location{% endblock %}
+{% block content %}
+<!--<div class="d-sm-flex align-items-center justify-content-between mb-4">-->
+<!--    <h1 class="h3 mb-0 text-gray-800">Add Department</h1>-->
+<!--</div>-->
+<div class="row">
+    <div class="col-md-12 col-md-offset-4">
+        <form enctype="multipart/form-data" role="form" method="post" autocomplete="off">
+            {% csrf_token %}
+            <h2 class="fs-title text-center py-4">Add Location</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'>Location Name</label>
+                        {{ form.location_name }}
+                        {{ form.location_name.errors }}
+                        <small>Enter Location Name</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'> Description</label>
+                        {{ form.description }}
+                        {{ form.description.errors }}
+                        <small>Enter Description</small>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="col-md-12 text-right">
+                <input type="submit" class="btn btn-success" value="Submit" id="one" style="margin-top: 30px;">
+                <input type=button class="btn btn-outline-warning" style="margin-top: 30px;" value="Back"
+                       onClick="javascript:history.go(-1);">
+                <a href="{%url 'dashboard'%}" class="btn btn-outline-primary ink-reaction" id="three"
+                   style="margin-top: 30px;">Back To Dashboard</a>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock%}

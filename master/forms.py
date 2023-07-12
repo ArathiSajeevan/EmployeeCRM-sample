@@ -42,3 +42,21 @@ class DesignationEditForm(ModelForm):
             "designation_name": forms.TextInput(attrs={"class":"form-control", 'required':'true'}),
             "description": forms.Textarea(attrs={"class": "form-control", 'rows': 3})
         }
+
+class LocationAddForm(ModelForm):
+    class Meta:
+        model = Location
+        fields = ['location_name', 'description']
+        widgets = {
+            "location_name": forms.TextInput(attrs={"class": "form-control", 'required': 'true'}),
+            "description": forms.Textarea(attrs={"class": "form-control", 'rows': 2})
+        }
+
+class LocationEditForm(ModelForm):
+    class Meta:
+        model = Location
+        fields = ['location_name', 'description']
+        widgets = {
+            "location_name": forms.TextInput(attrs={"class": "form-control", 'required': 'true'}),
+            "description": forms.Textarea(attrs={"class": "form-control", 'rows': 2})
+        }
