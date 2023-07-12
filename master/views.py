@@ -192,4 +192,11 @@ def location_add(request):
     
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def location_list(request):
+    mydata = Location.objects.all()
+    if(mydata != ''):
+        return render(request, 'master/location_list.html',{'datas':mydata})
+    else:
+        return render(request, 'master/location_list.html')
