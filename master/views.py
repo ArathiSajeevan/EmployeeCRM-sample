@@ -6,7 +6,7 @@ from django.views.decorators.cache import cache_control
 
 from master.forms import DepartmentForm, DepartmentEditForm
 from master.forms import DesignationForm, DesignationEditForm
-from master.forms import LocationAddForm
+from master.forms import LocationAddForm, LocationEditForm
 from .models import Designation, tbl_department, Location
 from django.contrib import messages
 
@@ -200,3 +200,33 @@ def location_list(request):
         return render(request, 'master/location_list.html',{'datas':mydata})
     else:
         return render(request, 'master/location_list.html')
+
+
+
+
+@login_required
+def update_location(request, pk):
+    template_name = "master/update_location.html"
+    locationData = Location.objects.get(location_id = pk)
+    form = LocationEditForm(instance=locationData)
+    
+
+    if locationData:
+        editing = 1
+    else:
+        editing = 0
+
+    context = {'form': form, 'LocationAddForm':LocationAddForm, 'editing': editing}
+    if request.method == "POST":
+        form = LocationAddForm(request.POST, instance=locationData)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.save()
+            messages.success(request, 'Location Details Updated.', 'alert-success')
+            return redirect('location_list')
+        else:
+            context = {'form': form, 'editing': editing}
+            messages.success(request, 'Data is not valid.', 'alert-danger')
+            return render(request, template_name, context)
+    else:
+        return render(request, template_name, context)
