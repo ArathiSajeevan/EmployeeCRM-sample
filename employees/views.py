@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from employees.forms import EmployeeForm
+from employees.models import Employee
 
 # Create your views here.
 
@@ -18,8 +19,9 @@ def employee_add(request):
         if form.is_valid():
             data = form.save(commit=False)
             data.save()
+            print(data)
             messages.success(request, 'Employee Successfully Added.', 'alert-success')
-            return redirect('employee_add')
+            return redirect('employee_list')
         else:
             context = {'form': form}
             print(form.errors)
@@ -28,3 +30,11 @@ def employee_add(request):
     else:
         return render(request, template_name, context)
     
+
+@login_required
+def employee_list(request):
+    mydata = Employee.objects.all()
+    if(mydata != ''):
+        return render(request, 'employees/employee_list.html',{'datas':mydata})
+    else:
+        return render(request, 'employees/employee_list.html')
