@@ -181,7 +181,7 @@ def location_add(request):
             data = form.save(commit=False)
             data.save()
             messages.success(request, 'Location Successfully Added.', 'alert-success')
-            return redirect('location_add')
+            return redirect('location_list')
         else:
             context = {'form': form}
             print(form.errors)

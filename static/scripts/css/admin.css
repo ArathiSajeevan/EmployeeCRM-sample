@@ -1,0 +1,67 @@
+.dataTables_paginate {
+  float: right !important;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+    text-align: right !important;
+}
+
+.custom-select-sm {
+    width: 80px !important;
+}
+
+#dataTable_filter .form-control {
+    background: url("/static/img/search.svg");
+    background-repeat: no-repeat;
+    background-position: 0px 1px !important;
+}
+
+.form-control-sm {
+    height: calc(1.5em + 0.5rem + 2px) !important;
+    padding: 0.25rem 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
+.select2 {
+    width: 100%!important;
+    /* force fluid responsive */
+  }
+
+  .select2-container {
+
+    .select2-selection--single {
+       height: 30px;
+       position: relative;
+
+      .select2-selection__rendered {
+        line-height: 30px;
+      }
+
+      .select2-selection__arrow {
+        top: 2px;
+        right: 8px;
+      }
+
+      .select2-container--default {
+
+        .select2-results>.select2-results__options {
+          -webkit-overflow-scrolling: touch; /* use momentum scrolling */
+        }
+      }
+    }
+  }
+footer.sticky-footer {
+  padding: 2rem 0;
+  flex-shrink: 0;
+}
+
+footer.sticky-footer .copyright {
+  line-height: 1;
+  font-size: 0.8rem;
+}
