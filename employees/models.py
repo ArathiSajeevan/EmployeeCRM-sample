@@ -24,7 +24,7 @@ class Employee(models.Model):
     emp_end_date = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
     address = models.CharField(max_length=500, null=True, blank=True)
-    image = models.FileField(null=True, blank=True)
+    image = models.FileField(upload_to=None, null=True, blank=True)
     department_name = models.ForeignKey(tbl_department, on_delete=models.SET_NULL, null=True, blank=True)
     location_name = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True)
     designation_name = models.ForeignKey(Designation, on_delete=models.SET_NULL, null=True, blank=True)
@@ -34,5 +34,9 @@ class Employee(models.Model):
 
     def __str__(self):
         return str(self.name)
+    
+
+
+    
     
 

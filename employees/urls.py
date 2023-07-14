@@ -9,4 +9,5 @@ urlpatterns = [
     path('employee_add/', employee_add, name="employee_add"),
     path('employee_list/', employee_list, name="employee_list"),
     path('delete_employee/<str:id>', delete_employee, name="delete_employee"),
+    path('employee_edit/<str:pk>', employee_edit, name="employee_edit"),
 ]

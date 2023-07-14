@@ -2,9 +2,8 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from employees.forms import EmployeeForm
+from employees.forms import EmployeeForm, EmployeeEditForm
 from employees.models import Employee
-from datetime import datetime
 
 # Create your views here.
 
@@ -48,3 +47,30 @@ def delete_employee(request, id):
     Employee.objects.get(employee_id=id).delete()
     messages.success(request, 'Data Deleted Successfully.', 'alert-danger')
     return redirect('employee_list')
+
+@login_required
+def employee_edit(request, pk):
+    template_name = "employees/employee_edit.html"
+    employeeData = Employee.objects.get(employee_id = pk)
+    form = EmployeeEditForm(instance=employeeData)
+    
+
+    if employeeData:
+        editing = 1
+    else:
+        editing = 0
+
+    context = {'form': form, 'DesignationForm':EmployeeForm, 'editing': editing}
+    if request.method == "POST":
+        form = EmployeeForm(request.POST, instance=employeeData)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.save()
+            messages.success(request, 'Employee Details Updated.', 'alert-success')
+            return redirect('employee_list')
+        else:
+            context = {'form': form, 'editing': editing}
+            messages.success(request, 'Data is not valid.', 'alert-danger')
+            return render(request, template_name, context)
+    else:
+        return render(request, template_name, context)
