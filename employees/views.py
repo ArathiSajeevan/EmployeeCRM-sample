@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from employees.forms import EmployeeForm
 from employees.models import Employee
+from datetime import datetime
 
 # Create your views here.
 
@@ -20,7 +21,7 @@ def employee_add(request):
             data = form.save(commit=False)
             data.save()
             print(data)
-            messages.success(request, 'Employee Successfully Added.', 'alert-success')
+            messages.success(request, 'Employee Added Successfully.', 'alert-success')
             return redirect('employee_list')
         else:
             context = {'form': form}
@@ -38,3 +39,12 @@ def employee_list(request):
         return render(request, 'employees/employee_list.html',{'datas':mydata})
     else:
         return render(request, 'employees/employee_list.html')
+    
+
+
+@login_required()
+def delete_employee(request, id):
+    pk = request.GET.get("designation_id")
+    Employee.objects.get(employee_id=id).delete()
+    messages.success(request, 'Data Deleted Successfully.', 'alert-danger')
+    return redirect('employee_list')

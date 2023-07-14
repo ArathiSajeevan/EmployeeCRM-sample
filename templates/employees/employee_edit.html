@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% block title %} Edit Employee Details{% endblock %}
+{% block content %}
+<!--<div class="d-sm-flex align-items-center justify-content-between mb-4">-->
+<!--    <h1 class="h3 mb-0 text-gray-800">Edit Department</h1>-->
+<!--</div>-->
+<div class="row">
+    <div class="col-md-12 col-md-offset-4">
+        <form enctype="multipart/form-data" role="form" method="post" autocomplete="off">
+            {% csrf_token %}
+            <h2 class="fs-title text-center py-4">Edit Employee Details</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'>Name</label>
+                        {{ form.name }}
+                        {{ form.name.errors }}
+                        <small>Enter Your Name</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'> Employee No</label>
+                        {{ form.employee_no }}
+                        {{ form.employee_no.errors }}
+                        <small>Enter Employee No</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'>Join Date</label>
+                        {{ form.join_date }}
+                        {{ form.join_date.errors }}
+                        <small>Enter Join Date</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'>Employee Start Date</label>
+                        {{ form.emp_start_date }}
+                        {{ form.emp_start_date.errors }}
+                        <small>Enter Employee Start Date</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'> Employee End Date</label>
+                        {{ form.emp_end_date }}
+                        {{ form.emp_end_date.errors }}
+                        <small>Enter Employee End Date</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'>Phone</label>
+                        {{ form.phone }}
+                        {{ form.phone.errors }}
+                        <small>Enter Phone</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'>Address</label>
+                        {{ form.address }}
+                        {{ form.address.errors }}
+                        <small>Enter Address</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'>Image</label>
+                        {{ form.image }}
+                        {{ form.image.errors }}
+                        <small>Add Image</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'>Department Name</label>
+                        {{ form.department_name }}
+                        {{ form.department_name.errors }}
+                        <small>Select Department Name</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'>Location Name</label>
+                        {{ form.location_name }}
+                        {{ form.location_name.errors }}
+                        <small>Select Location Name</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'>Designation Name</label>
+                        {{ form.designation_name }}
+                        {{ form.designation_name.errors }}
+                        <small>Select Designation Name</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'>Status</label>
+                        {{ form.status }}
+                        {{ form.status.errors }}
+                        <small>Enter Status</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label class='control-label'>Skills</label>
+                        {{ form.skills }}
+                        {{ form.skills.errors }}
+                        <small>Enter Skills</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-right">
+                <input type="submit" class="btn btn-success" value="Submit" id="one" style="margin-top: 30px;">
+                <input type=button class="btn btn-outline-warning" style="margin-top: 30px;" value="Back"
+                       onClick="javascript:history.go(-1);">
+                <a href="{%url 'dashboard'%}" class="btn btn-outline-primary ink-reaction" id="three"
+                   style="margin-top: 30px;">Back To Dashboard</a>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock%}
