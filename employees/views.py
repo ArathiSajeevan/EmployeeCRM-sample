@@ -14,7 +14,7 @@ def employee_add(request):
     template_name = "employees/employee_add.html"
     context = {'form': form}
     if request.method == "POST":
-        form = EmployeeForm(request.POST)
+        form = EmployeeForm(request.POST, request.FILES)
 
         if form.is_valid():
             data = form.save(commit=False)
@@ -52,7 +52,7 @@ def delete_employee(request, id):
 def employee_edit(request, pk):
     template_name = "employees/employee_edit.html"
     employeeData = Employee.objects.get(employee_id = pk)
-    form = EmployeeEditForm(instance=employeeData)
+    form = EmployeeEditForm(request.FILES, instance=employeeData)
     
 
     if employeeData:
@@ -62,7 +62,7 @@ def employee_edit(request, pk):
 
     context = {'form': form, 'DesignationForm':EmployeeForm, 'editing': editing}
     if request.method == "POST":
-        form = EmployeeForm(request.POST, instance=employeeData)
+        form = EmployeeForm(request.POST, request.FILES ,instance=employeeData)
         if form.is_valid():
             data = form.save(commit=False)
             data.save()

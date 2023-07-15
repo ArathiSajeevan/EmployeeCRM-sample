@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %} Create User {% endblock %}
+
+{% block content %}
+<script>
+    function button_disable() {
+        document.querySelector('button[type="submit"]').disabled = "true";
+        document.querySelector('button[type="submit"]').innerHTML = "Please wait";
+        return true;
+    }
+
+</script>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4 shadow">
+            <div class="card-body">
+                <form class="form" role="form" action="" method="post" onsubmit="button_disable();"> 
+                    {% csrf_token %}
+                    <header class="h3 font-weight-bold text-primary text-center">Register New User</header>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group required">
+                                <label class='control-label'>First Name<span style="color:red;">*</span></label>
+                                {{ form.first_name}}
+                                {{form.first_name.errors}}
+                                <small>Enter First Name</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group required">
+                                <label class='control-label'>Last Name<span style="color:red;">*</span></label>
+                                {{ form.last_name}}
+                                {{form.last_name.errors}}
+                                <small>Enter Last Name</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group required">
+                                <label class='control-label'>Email<span style="color:red;">*</span></label>
+                                {{ form.email}}
+                                <span style="color: red;">{{ form.email.errors }}</span>
+                                <small>Enter Email</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group required">
+                                <label class='control-label'>Phone<span style="color:red;">*</span></label>
+                                {{ form.phone}}
+                                {{form.phone.errors}}
+                                <small>Enter Phone</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group required">
+                                <label class='control-label'>User Type<span style="color:red;">*</span></label>
+                                {{ form.user_type}}
+                                {{form.user_type.errors}}
+                                <small>Select User Type</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group required">
+                                <label class='control-label'>Password<span style="color:red;">*</span></label>
+                                <input type="password" name="password1" class="form-control" autocomplete="new-password"
+                                       required="" id="id_password1">
+                                <small>Enter Password</small>
+                                <br>
+                                {{ form.password1.help_text }}
+
+                                <span style="color: red;">{{ form.password1.errors }}</span>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group required">
+                                <label class='control-label'>Confirm Password<span style="color:red;">*</span></label>
+                                <input type="password" name="password2" class="form-control" autocomplete="new-password"
+                                       required="" id="id_password2">
+                                <small>Enter Confirm Password</small>
+                                <br>
+                                {{ form.password2.help_text }}
+
+                                <span style="color: red;">{{ form.password2.errors }}</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 text-right">
+                        <button type="submit" class="btn btn-success ink-reaction">Create User</button>
+                        <input type=button class="btn btn-outline-warning" value="Back"
+                               onClick="javascript:history.go(-1);">
+                        <a href="{%url 'dashboard'%}" class="btn btn-outline-primary ink-reaction">Back to Dashboard</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
