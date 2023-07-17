@@ -52,15 +52,14 @@ def delete_employee(request, id):
 def employee_edit(request, pk):
     template_name = "employees/employee_edit.html"
     employeeData = Employee.objects.get(employee_id = pk)
-    form = EmployeeEditForm(request.FILES, instance=employeeData)
+    form = EmployeeEditForm(instance=employeeData)
     
-
     if employeeData:
         editing = 1
     else:
         editing = 0
 
-    context = {'form': form, 'DesignationForm':EmployeeForm, 'editing': editing}
+    context = {'form': form, 'EmployeeForm':EmployeeForm, 'editing': editing}
     if request.method == "POST":
         form = EmployeeForm(request.POST, request.FILES ,instance=employeeData)
         if form.is_valid():
