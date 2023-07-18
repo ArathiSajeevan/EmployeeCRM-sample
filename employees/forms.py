@@ -1,17 +1,17 @@
 from django.forms import ModelForm
 from django import forms
 from .models import *
-from employees.models import Employee
 
 class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
         fields = ['name', 'employee_no', 'join_date', 'emp_start_date', 'emp_end_date', 'phone', 'address', 
                   'image', 'department_name','location_name', 'designation_name', 'status', 'skills' ]
-        widget = {
+        
+        widgets = {
             "name": forms.TextInput(attrs={"class": "form-control", 'required': 'true'}),
             "employee_no": forms.TextInput(attrs={"class": "form-control", 'required': 'true'}),
-            "join_date" : forms.DateInput(attrs={"type": "date", "class": "form-control"}),
+            "join_date" : forms.DateInput(attrs={"type": "date", "class": "form-control", 'required': 'true'}),
             "emp_start_date": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
             "emp_end_date" : forms.DateInput(attrs={"type": "date", "class": "form-control"}),
             "phone": forms.TextInput(attrs={"class": "form-control", 'required': 'true',
@@ -34,7 +34,7 @@ class EmployeeEditForm(ModelForm):
         model = Employee
         fields = ['name', 'employee_no', 'join_date', 'emp_start_date', 'emp_end_date', 'phone', 'address', 
                   'image', 'department_name','location_name', 'designation_name', 'status', 'skills' ]
-        widget = {
+        widgets = {
             "name": forms.TextInput(attrs={"class": "form-control", 'required': 'true'}),
             "employee_no": forms.TextInput(attrs={"class": "form-control", 'required': 'true'}),
             "join_date" : forms.DateInput(attrs={"type": "date", "class": "form-control"}),
