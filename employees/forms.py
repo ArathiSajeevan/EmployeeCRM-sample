@@ -19,7 +19,6 @@ class EmployeeForm(ModelForm):
                                             'title': 'Phone number should be 6-12 digits'
                                             }),
             "address": forms.TextInput(attrs={"class": "form-control", 'required': 'true'}),
-            "image": forms.FileInput(attrs={'class': 'form-control'}),
             "department_name": forms.Select(attrs={"class": "form-control", "required": "true"}),
             "location_name": forms.Select(attrs={"class": "form-control", "required": "true"}),
             "designation_name": forms.Select(attrs={"class": "form-control", "required": "true"}),
@@ -45,7 +44,6 @@ class EmployeeEditForm(ModelForm):
                                             'title': 'Phone number should be 6-12 digits'
                                             }),
             "address": forms.TextInput(attrs={"class": "form-control", 'required': 'true'}),
-            "image": forms.FileInput(attrs={'class': 'form-control'}),
             "department_name": forms.Select(attrs={"class": "form-control", "required": "true"}),
             "location_name": forms.Select(attrs={"class": "form-control", "required": "true"}),
             "designation_name": forms.Select(attrs={"class": "form-control", "required": "true"}),

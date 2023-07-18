@@ -18,15 +18,7 @@
                     <th>Name</th>
                     <th>Address</th>
                     <th>Phone</th>
-                    <th>Join Date</th>
-                    <th>Image</th>
-                    <th>Employee Start Date</th>
-                    <th>Employee End Date</th>
-                    <th>Department Name</th>
-                    <th>Designation Name</th>
-                    <th>Location Name</th>
                     <th>Status</th>
-                    <th>Skills</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -38,16 +30,10 @@
                     <td>{{data.name}}</td>
                     <td>{{data.address}}</td>
                     <td>{{data.phone}}</td>
-                    <td>{{data.join_date}}</td>
-                    <td>{{data.image}}</td>
-                    <td>{{data.emp_start_date}}</td>
-                    <td>{{data.emp_end_date}}</td>
-                    <td>{{data.department_name}}</td>
-                    <td>{{data.designation_name}}</td>
-                    <td>{{data.location_name}}</td>
                     <td>{{data.status}}</td>
-                    <td>{{data.skills}}</td>
                         <td>
+                            <a href="{%url 'employee_details' data.employee_id%}"
+                                class="btn btn-outline-primary fa fa-eye btn-md" data-toggle="tooltip" title="Details"></a>
                             <a href="{%url 'employee_edit' data.employee_id%}"
                                 class="btn btn-outline-secondary fa fa-edit btn-md" 
                                 data-toggle="tooltip" title="Edit"></a>

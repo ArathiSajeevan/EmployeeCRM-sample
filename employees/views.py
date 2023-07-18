@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 
 from employees.forms import EmployeeForm, EmployeeEditForm
 from employees.models import Employee
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -73,3 +75,16 @@ def employee_edit(request, pk):
             return render(request, template_name, context)
     else:
         return render(request, template_name, context)
+    
+
+
+class employee_details(TemplateView, LoginRequiredMixin):
+    model = Employee
+    template_name = "employees/employee_details.html"
+
+    def get(self, request, *args, **kwargs):
+        employee_id = self.kwargs.get('pk')
+        employee = Employee.objects.get(employee_id=employee_id)
+        context = {'employee': employee}
+        return render(request, self.template_name, context)
+    

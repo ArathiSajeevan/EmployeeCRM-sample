@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style> td.table_notes {
+    white-space: normal;
+    width: 500px; // we can adjust the width
+    word-break: break-all;
+    text-align: justify;
+}
+</style>
+
+<div class="d-flex mb-4">
+
+    <!--    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mt-3 tab-card">
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active p-3" id="vehicle_one" role="tabpanel"
+                     aria-labelledby="vehicle_one-tab">
+                    <h5 class="card-title text-center py-2">Employee Details</h5>
+                    <table class="table table-hover" style="width:100%">
+                        <tr>
+                            <th>Name:</th>
+                            <td>{{employee.name|default_if_none:''}}</td>
+                            <th>Employee No:</th>
+                            <td>{{employee.employee_no|default_if_none:''}}</td>
+
+                        </tr>
+                        <tr>
+
+                            <th>Join Date:</th>
+                            <td>{{employee.join_date|default_if_none:''}}</td>
+                            <th>Start Date</th>
+                            <td>{{employee.emp_start_date|default_if_none:''}}</td>
+                        </tr>
+                        <tr>
+                            <th>End Date:</th>
+                            <td>{{employee.emp_end_date|default_if_none:''}}</td>
+                            <th>Phone:</th>
+                            <td>{{employee.phone|default_if_none:''}}</td>
+
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td>{{employee.address|default_if_none:''}}</td>
+                            <th>Image:</th>
+                            {% if employee.image.url != None %}
+                            <td><a href="{{employee.image.url}}" target="_blank"><i class="fas fa-image fa-2x"></i></a>
+                            </td>
+                            {% else %}
+                            <td> -</td>
+                            {% endif %}
+                            
+                        </tr>
+
+                        <tr>
+                            <th>Department:</th>
+                            <td>{{employee.department_name|default_if_none:''}}</td>
+                            <th>Location</th>
+                            <td>{{employee.location_name|default_if_none:''}}</td>
+                            
+
+                        </tr>
+                        <tr>
+                            <th>Designation:</th>
+                            <td>{{employee.designation_name|default_if_none:''}}</td>
+                            <th>Current Status:</th>
+                            <td>{{employee.status|default_if_none:''}}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Skills:</th>
+                            <td>{{employee.skills|default_if_none:''}}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Created User:</th>
+                            <td>{{employee.created_user|default_if_none:''}}</td>
+                            <th>Created at:</th>
+                            <td>{{employee.created_at|date:'d-m-Y h:i a'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Updated User:</th>
+                            <td>{{employee.updated_user|default_if_none:''}}</td>
+                            <th>Updated at:</th>
+                            <td>{{employee.updated_at|date:'d-m-Y h:i a'}}</td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="text-right mx-2 my-2">
+                    <input type=button class="btn btn-outline-warning" value="Back" onClick="javascript:history.go(-1);">
+                    <a href="{%url 'dashboard'%}" class="btn btn-outline-primary">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
