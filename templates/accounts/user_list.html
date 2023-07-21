@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %} User list{% endblock %}
+{% block content %}
+<div class="d-flex mb-4">
+    <h1 class="mr-auto h3 mb-0 text-gray-800">User List</h1>
+    <a href="{%url 'user_reg'%}" class="d-none d-sm-inline-block mr-5 btn btn-sm btn-primary shadow-sm"><i
+            class="text-white-50"></i>Register New User</a>
+    <!--    <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
+</div>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>User Type</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in userlist %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{data.first_name}}</td>
+                    <td>{{data.user_type}}</td>
+                    <td>{{data.phone}}</td>
+                    <td>{{data.is_active}}</td>
+                        <td>
+                            <a href="#"
+                                class="btn btn-outline-primary fa fa-eye btn-md" data-toggle="tooltip" title="Details"></a>
+                            <a href="#"
+                                class="btn btn-outline-secondary fa fa-edit btn-md" 
+                                data-toggle="tooltip" title="Edit"></a>
+
+                            <a href="#"
+                               data-bs-toggle="modal" id="{{data.user_id}}" data-bs-target="#deleteItemModal"
+                               onclick="return f1(this)" title="Delete"><span class="btn btn-outline-danger btn-md confirm-delete">
+                                <i class="fa fa-trash" aria-hidden="true"></i></span></a>
+        
+                        </td>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-right my-1">
+                <input type=button class="btn btn-outline-warning" value="Back" onClick="javascript:history.go(-1);">
+                <a href="{%url 'dashboard'%}" class="btn btn-outline-primary">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Delete Modal-->
+<div class="modal" id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby="deleteItemModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel11">Delete Designation ?</h5>
+                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">Do you want to Delete this Designation ?</div>
+            <div class="modal-footer">
+                <form role="form" action="#" method="get" id="form_confirm_modal">
+                    {% csrf_token %}
+                    <input type="hidden" id="delete_id" name="delete_id">
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="hiding()">Cancel
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function f1(c){
+    document.getElementById("delete_id").value = c.id;
+    $('#deleteItemModal').show();
+}
+
+
+</script>
+<script>
+    function hiding(){
+    $('#deleteItemModal').hide();
+    }
+
+
+</script>
+
+    <div class="col-md-2"></div>
+
+{% endblock %}
