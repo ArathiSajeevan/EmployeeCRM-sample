@@ -28,6 +28,8 @@ class Employee(models.Model):
     department_name = models.ForeignKey(tbl_department, on_delete=models.SET_NULL, null=True, blank=True)
     location_name = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True)
     designation_name = models.ForeignKey(Designation, on_delete=models.SET_NULL, null=True, blank=True)
+    id = models.ForeignKey('accounts.CustomUser', on_delete=models.SET_NULL, null=True, blank=True,
+                                related_name='employee_customuser')
 
     class Meta:
         ordering = ('-created_at',)

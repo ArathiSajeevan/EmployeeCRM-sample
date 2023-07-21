@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %} Update User {% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+      <div class="card mb-4 shadow">
+          <div class="card-body">
+             <form class="form" role="form" action="" method="post" autocomplete="off"> {% csrf_token %}
+                 <header class="h4 text-uppercase font-weight-bold text-primary">Update User</header><hr>
+
+                 <div class="row">
+                     <div class="col-sm-6">
+                        <div class="form-group required">
+                            <label class='control-label'>First Name<span style="color:red;">*</span></label>
+                                {{ form.first_name}}
+                        </div>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="form-group required">
+                            <label class='control-label'>Last Name<span style="color:red;">*</span></label>
+                                {{ form.last_name}}
+                        </div>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-sm-6">
+                        <div class="form-group required">
+                            <label class='control-label'>Username<span style="color:red;">*</span></label>
+                                {{ form.username}}
+                                {{ form.username.errors }}
+                        </div>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="form-group required">
+                            <label class='control-label'>Phone<span style="color:red;">*</span></label>
+                                {{ form.phone}}
+                                {{ form.phone.errors }}
+                        </div>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class='control-label'>Active</label>
+                                {{ form.is_active}}
+                        </div>
+                    </div>
+                 </div>
+
+                 <div class="col-sm-12 text-right">
+                     <button type="submit" class="btn btn-success ink-reaction">Update User</button>
+                     <input type=button class="btn btn-outline-warning" value="Back" onClick="javascript:history.go(-1);">
+                     <a href="{%url 'dashboard'%}" class="btn btn-outline-primary ink-reaction">Back to Dashboard</a>
+                 </div>
+             </form>
+          </div>
+      </div>
+  </div>
+    <script>
+        function show_agency() {
+                let user_type = document.querySelector('#id_user_type');
+                let user_type_id = user_type.selectedOptions[0].value;
+                let agency = document.querySelector('.agency');
+                let location = document.querySelector('.location');
+
+
+                if (user_type_id === "Agency") {
+                    agency.style.display = "block";
+                    location.style.display = "none";
+                    document.querySelector('#id_agency').setAttribute('required', 'true');
+                    document.querySelector('#id_location').removeAttribute('required');
+                } else {
+                    document.querySelector('#id_agency').removeAttribute('required');
+                    document.querySelector('#id_location').setAttribute('required', 'true');
+                    agency.style.display = "none";
+                    location.style.display = "block";
+                }
+            }
+    </script>
+</div>
+{% endblock %}

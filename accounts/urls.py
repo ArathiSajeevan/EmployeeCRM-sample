@@ -6,4 +6,5 @@ urlpatterns = [
     path('',login_user,name="login"),
     path('user_reg', sign_up, name='user_reg'),
     path('user_list', Userlist.as_view(), name='user_list'),
+    path('user_edit/<str:pk>',user_edit, name='user_edit'),
 ]
