@@ -106,3 +106,38 @@ def user_edit(request, pk):
             messages.success(request, 'Invalid Data', 'alert-danger')
             return render(request, template_name, context)
     return render(request, template_name, context)
+
+
+@login_required()
+def edit_profile(request):
+    form = UserRegForm(instance=request.user)
+    if request.user.is_superuser:
+        editing = 0
+    else:
+        editing = 1
+    context = {'form': form, 'editing': editing}
+    if request.method == 'POST':
+        form = UserRegForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            data = form.save(commit=False)
+            emp_exists = Employee.objects.filter(emp_user=request.user).exists()
+            if not emp_exists:
+                if data.user_type == "Viewer" or data.user_type == "Admin":
+                    name = data.first_name + " " + data.last_name
+                    Employee.objects.create(
+                        created_user=str(request.user),
+                        name=name,
+                        status='Active',
+                        join_date=data.date_joined,
+                        phone=data.phone,
+                        user_type=data.user_type,
+                        id=data,
+                    )
+            data.save()
+            messages.success(request, 'Profile Successfully Updated', 'alert-success')
+            return redirect('user_list')
+        else:
+            messages.success(request, 'Invalid Data', 'alert-danger')
+    else:
+        return render(request, 'accounts/profile.html', context)
+    return render(request, 'accounts/profile.html', context)

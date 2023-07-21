@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %} Update Profile {% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4 shadow">
+            <div class="card-body">
+                <form class="form" role="form" action="" method="post" autocomplete="off"> {% csrf_token %}
+                    <header class="h4 text-uppercase font-weight-bold text-primary">Update Profile
+                       {{request.user.first_name}} {{request.user.last_name | default_if_none:""}}
+                    </header>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group required">
+                                <label class='control-label'>User Type<span style="color:red;">*</span></label>
+                                {{ form.user_type}}
+                                {{form.user_type.errors}}
+                                <small>Select User Type</small>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group required">
+                                <label class='control-label'>First Name<span style="color:red;">*</span></label>
+                                {{ form.first_name}}
+                                {{form.first_name.errors}}
+                                <small>Enter First Name</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group required">
+                                <label class='control-label'>Last Name<span style="color:red;">*</span></label>
+                                {{ form.last_name}}
+                                {{form.last_name.errors}}
+                                <small>Enter Last Name</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group required">
+                                <label class='control-label'>Phone<span style="color:red;">*</span></label>
+                                {{form.phone}}
+                                {{form.phone.errors}}
+                                <small>Enter Phone</small>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group required">
+                                <label class='control-label'>Password<span style="color:red;">*</span></label>
+                                <input type="password" name="password1" class="form-control" autocomplete="new-password"
+                                       required="" id="id_password1">
+                                <small>Enter Password</small>
+                                {{ form.password1.help_text }}
+                                {{ form.password1.errors }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group required">
+                                <label class='control-label'>Confirm Password<span style="color:red;">*</span></label>
+                                <input type="password" name="password2" class="form-control" autocomplete="new-password"
+                                       required="" id="id_password2">
+                                <small>Enter Confirm Password</small>
+                                <br>
+                                {{ form.password2.help_text }}
+                                {{ form.password2.errors }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 text-right">
+                        <button type="submit" class="btn btn-success ink-reaction">Update</button>
+                        <input type=button class="btn btn-outline-warning" value="Back"
+                               onClick="javascript:history.go(-1);">
+                        <a href="{%url 'dashboard'%}" class="btn btn-outline-primary ink-reaction">Back to Dashboard</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        let a = {{editing}};
+        if (a==1){
+            document.getElementById("id_user_type").style.pointerEvents = "none";
+        }
+    });
+
+</script>
+{% endblock %}
