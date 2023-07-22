@@ -116,8 +116,8 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <!--                    <h6 class="collapse-header">Employee Utilities:</h6>-->
-                    {% if request.user.user_type != "Accountant" %}
-                    <a class="collapse-item" href="#">Employee Reports</a>
+                    {% if request.user.user_type != "Viewer" %}
+                    <a class="collapse-item" href="{% url 'employee_reports'%}">Employee Reports</a>
                     {% endif %}
                     </div>
             </div>

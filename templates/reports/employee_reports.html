@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %} Project Report{% endblock %}
+{% block content %}
+
+<div class="container-fluid py-4">
+<div class="my-4">
+    <h1 class="mr-auto h3 mb-0 text-gray-800">Employee Report</h1>
+</div>
+<div class="row">
+    <div class="col-md-12 col-md-offset-4">
+        <form method="post" id="myform">
+             {% csrf_token %}
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group">
+                            {{form.employee}}
+                            <small class="form-text text-muted">Employee</small>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <input type="submit" class="btn btn-outline-primary ink-reaction" value="Export Report" id="report" >
+                    </div>
+        </div>
+            </form>
+     </div>
+ <div class="text-right mx-2 my-2">
+            <input type=button class="btn btn-outline-warning" value="Back" onClick="javascript:history.go(-1);">
+            <a href="{%url 'dashboard'%}" class="btn btn-outline-primary">Back to Dashboard</a>
+        </div>
+</div>
+</div>
+<script>
+
+$("#myform").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+    var form = $(this);
+    var actionUrl = form.attr('action');
+
+    $.ajax({
+        type: "POST",
+        url: actionUrl,
+        data: form.serialize(),
+        beforeSend: function() {
+            document.querySelector('#report').disabled=true;
+            document.querySelector('#report').value="Please Wait";
+            },
+            xhrFields: {
+                responseType: 'blob'
+            },
+        success: function (blob, status, xhr) {
+
+                let filename = "EmployeeReport.csv";
+                let URL = window.URL || window.webkitURL;
+                let downloadUrl = URL.createObjectURL(blob);
+
+                if (filename) {
+                    let a = document.createElement("a");
+                    if (typeof a.download === 'undefined') {
+                        window.location.href = downloadUrl;
+                    } else {
+                        a.href = downloadUrl;
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                    }
+                } else {
+                    window.location.href = downloadUrl;
+                }
+                document.querySelector('#report').disabled=false;
+                document.querySelector('#report').value="Export Report";
+            },
+            error: function (data) {
+                document.querySelector('#report').disabled=false;
+                document.querySelector('#report').value="Export Report";
+            }
+    });
+
+});
+
+</script>
+{% endblock %}
