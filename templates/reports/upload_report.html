@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} Upload File{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12 col-md-offset-4">
+        <form enctype="multipart/form-data" role="form" method="post" autocomplete="off">
+            {% csrf_token %}
+            <h2 class="fs-title text-center py-4">Upload File</h2>
+            <input type="file" name="my_file"/>
+            <hr>
+            <div class="col-md-12 text-right">
+                <input type="submit" class="btn btn-success" value="Upload" id="one" style="margin-top: 30px;">
+                <input type=button class="btn btn-outline-warning" style="margin-top: 30px;" value="Back"
+                       onClick="javascript:history.go(-1);">
+                <a href="{%url 'dashboard'%}" class="btn btn-outline-primary ink-reaction" id="three"
+                   style="margin-top: 30px;">Back To Dashboard</a>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock%}

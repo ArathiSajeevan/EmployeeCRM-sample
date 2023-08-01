@@ -11,10 +11,18 @@
         <form method="post" id="myform">
              {% csrf_token %}
                 <div class="row">
+
                     <div class="col-3">
                         <div class="form-group">
-                            {{form.employee}}
-                            <small class="form-text text-muted">Employee</small>
+                            {{form.emp_start_date}}
+                            <small class="form-text text-muted">From Date</small>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group">
+                            {{form.emp_end_date}}
+                            <small class="form-text text-muted">To Date</small>
                         </div>
                     </div>
 

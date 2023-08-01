@@ -118,6 +118,7 @@
                     <!--                    <h6 class="collapse-header">Employee Utilities:</h6>-->
                     {% if request.user.user_type != "Viewer" %}
                     <a class="collapse-item" href="{% url 'employee_reports'%}">Employee Reports</a>
+                    <a class="collapse-item" href="{% url 'upload_report'%}">Upload Report</a>
                     {% endif %}
                     </div>
             </div>
